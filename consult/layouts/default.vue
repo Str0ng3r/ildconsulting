@@ -1,4 +1,16 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const visasUrls = [
+  { name: "США", url: "visas/USA" },
+  { name: "Великобританія", url: "visas/velicobritania" },
+  { name: "Канада", url: "visas/kanada" },
+  { name: "Шенген", url: "visas/shengen" },
+];
+const anotherUrls = [
+  { name: "Переклади", url: "visas/USA" },
+  { name: "Навчання", url: "visas/velicobritania" },
+  { name: "Консультація", url: "visas/kanada" },
+];
+</script>
 
 <template>
   <div class="container">
@@ -7,8 +19,16 @@
       <div class="wrap_nav_button">
         <ul class="nav_list">
           <NuxtLink to="/" class="nav_link">Головна</NuxtLink>
-          <NuxtLink to="visas" class="nav_link">Візи</NuxtLink>
-          <NuxtLink to="another" class="nav_link">Інші послуги</NuxtLink>
+          <BaseSelect
+            rotate-icon
+            :options="visasUrls"
+            :placeholder="'Візи'"
+          ></BaseSelect>
+          <BaseSelect
+            rotate-icon
+            :options="anotherUrls"
+            :placeholder="'Інші послуги'"
+          ></BaseSelect>
           <NuxtLink to="about" class="nav_link">Про нас</NuxtLink>
         </ul>
         <NuxtLink to="contact" class="call_button">Зв’язатись з нами</NuxtLink>
