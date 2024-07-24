@@ -14,39 +14,10 @@ const anotherUrls = [
 
 <template>
 	<div class="container">
-		<header>
-			<nuxt-icon name="logotip" filled></nuxt-icon>
-			<div class="wrap_nav_button">
-				<ul class="nav_list">
-					<NuxtLink to="/" class="nav_link">Головна</NuxtLink>
-					<BaseSelect
-						rotate-icon
-						:options="visasUrls"
-						:placeholder="'Візи'"
-					></BaseSelect>
-					<BaseSelect
-						rotate-icon
-						:options="anotherUrls"
-						:placeholder="'Інші послуги'"
-					></BaseSelect>
-					<NuxtLink to="about" class="nav_link">Про нас</NuxtLink>
-				</ul>
-				<NuxtLink to="contact" class="call_button">Зв’язатись з нами</NuxtLink>
-			</div>
-		</header>
-		<slot></slot>
-		<footer>
-			<div class="container_wrap text_wrap">
-				<h3 class="inform_text">Інформація для вас</h3>
-				<NuxtLink to="contacts" class="text_wrap__link_contacts"
-					>Контакти</NuxtLink
-				>
-				<NuxtLink to="FAQ" class="text_wrap__link_faq"
-					>Питання на відповіді</NuxtLink
-				>
-				<p class="text_wrap__copyright">Copyright 2024 © ILD Consulting Ltd</p>
-			</div>
-		</footer>
+		<div class="wrap_cont_visa">
+			<div class="left_block_visa"><BaseTabBar /></div>
+			<div class="right_block_visa"><slot></slot></div>
+		</div>
 	</div>
 </template>
 
@@ -54,6 +25,28 @@ const anotherUrls = [
 .container {
 	width: 100%;
 	margin: 0 auto;
+}
+.right_block_visa {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+.left_block_visa {
+	width: 100%;
+	max-width: 31rem;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.wrap_cont_visa {
+	width: 100%;
+	padding: 0rem 2rem;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
 }
 .text_wrap__link_contacts {
 	color: #fff;

@@ -13,7 +13,11 @@
     "click-outside-vue3": "^4.0.1",
     "nuxt": "^3.12.3",
     "nuxt-icons": "^3.2.1",
+    "nuxt-swiper": "^1.1.1",
     "v-click-outside": "^3.2.0",
     "vue": "latest"
+  },
+  "devDependencies": {
+    "sass": "^1.77.8"
   }
 }

@@ -1,5 +1,7 @@
 <script lang="ts" setup></script>
 <template>
-	<NuxtLayout name="visa"></NuxtLayout>
+  <div>
+    <h2>hello</h2>
+  </div>
 </template>
 <style scoped lang="scss"></style>
