@@ -1,21 +1,45 @@
 <script lang="ts" setup>
-const visasUrls = [
-	{ name: "США", url: "visas/USA" },
-	{ name: "Великобританія", url: "visas/velicobritania" },
-	{ name: "Канада", url: "visas/kanada" },
-	{ name: "Шенген", url: "visas/shengen" },
-];
-const anotherUrls = [
-	{ name: "Переклади", url: "visas/USA" },
-	{ name: "Навчання", url: "visas/velicobritania" },
-	{ name: "Консультація", url: "visas/kanada" },
-];
+interface Tab {
+	btnText: string;
+	btnLink: string;
+}
+interface TabBarProps {
+	tabArr?: Tab[];
+}
+const props = withDefaults(defineProps<TabBarProps>(), {
+	tabArr: () => [
+		{
+			btnText: "Звичайна візитор віза",
+			btnLink: "/visas/Britain/Visitor",
+		},
+		{
+			btnText: "Гуманітарна віза для українців",
+			btnLink: "/visas/Britain/Humanitar",
+		},
+		{
+			btnText: "Віза на приєднання до партнера",
+			btnLink: "/visas/Britain/Partner",
+		},
+		{
+			btnText: "Віза на возʼєднання сімʼї",
+			btnLink: "/visas/Britain/Family",
+		},
+		{
+			btnText: "Дитяча навчальна віза",
+			btnLink: "/visas/Britain/Kids-study",
+		},
+		{
+			btnText: "Студентська навчальна віза",
+			btnLink: "/visas/Britain/Student",
+		},
+	],
+});
 </script>
 
 <template>
 	<div class="container">
 		<div class="wrap_cont_visa">
-			<div class="left_block_visa"><BaseTabBar /></div>
+			<div class="left_block_visa"><BaseTabBar :tab-arr="tabArr" /></div>
 			<div class="right_block_visa"><slot></slot></div>
 		</div>
 	</div>
@@ -32,6 +56,8 @@ const anotherUrls = [
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
+	// max-width: 76.3rem;
+	padding-bottom: 10rem;
 }
 .left_block_visa {
 	width: 100%;
@@ -40,6 +66,8 @@ const anotherUrls = [
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	// margin: auto 0;
+	padding-top: 20rem;
 }
 .wrap_cont_visa {
 	width: 100%;
@@ -47,6 +75,8 @@ const anotherUrls = [
 	display: flex;
 	align-items: flex-start;
 	justify-content: flex-start;
+	min-height: 70vh;
+	margin-top: 6rem;
 }
 .text_wrap__link_contacts {
 	color: #fff;

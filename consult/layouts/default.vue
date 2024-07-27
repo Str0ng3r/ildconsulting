@@ -1,37 +1,41 @@
 <script lang="ts" setup>
 const visasUrls = [
-	{ name: "США", url: "visas/USA" },
-	{ name: "Великобританія", url: "visas/velicobritania" },
-	{ name: "Канада", url: "visas/kanada" },
-	{ name: "Шенген", url: "visas/shengen" },
+	{ name: "США", url: "/visas/USA" },
+	{ name: "Великобританія", url: "/visas/Britain/Visitor" },
+	{ name: "Канада", url: "/visas/Kanada/Humanitar" },
+	{ name: "Шенген", url: "/visas/Shingen" },
 ];
 const anotherUrls = [
-	{ name: "Переклади", url: "visas/USA" },
-	{ name: "Навчання", url: "visas/velicobritania" },
-	{ name: "Консультація", url: "visas/kanada" },
+	{ name: "Переклади", url: "/translate" },
+	{ name: "Навчання", url: "/study" },
+	{ name: "Консультація", url: "/consultation" },
 ];
 </script>
 
 <template>
 	<div class="container">
 		<header>
-			<nuxt-icon name="logotip" filled></nuxt-icon>
-			<div class="wrap_nav_button">
-				<ul class="nav_list">
-					<NuxtLink to="/" class="nav_link">Головна</NuxtLink>
-					<BaseSelect
-						rotate-icon
-						:options="visasUrls"
-						:placeholder="'Візи'"
-					></BaseSelect>
-					<BaseSelect
-						rotate-icon
-						:options="anotherUrls"
-						:placeholder="'Інші послуги'"
-					></BaseSelect>
-					<NuxtLink to="about" class="nav_link">Про нас</NuxtLink>
-				</ul>
-				<NuxtLink to="contact" class="call_button">Зв’язатись з нами</NuxtLink>
+			<div class="container_wrap header_container">
+				<nuxt-icon name="logotip" filled></nuxt-icon>
+				<div class="wrap_nav_button">
+					<ul class="nav_list">
+						<NuxtLink to="/" class="nav_link">Головна</NuxtLink>
+						<BaseSelect
+							rotate-icon
+							:options="visasUrls"
+							:placeholder="'Візи'"
+						></BaseSelect>
+						<BaseSelect
+							rotate-icon
+							:options="anotherUrls"
+							:placeholder="'Інші послуги'"
+						></BaseSelect>
+						<NuxtLink to="about" class="nav_link">Про нас</NuxtLink>
+					</ul>
+					<NuxtLink to="contact" class="call_button"
+						>Зв’язатись з нами</NuxtLink
+					>
+				</div>
 			</div>
 		</header>
 		<slot></slot>
@@ -90,15 +94,18 @@ const anotherUrls = [
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+	padding: 0 16rem;
 }
 header {
 	width: 100%;
 	padding: 1.3rem 14rem;
+	// max-width: 144rem;
+	border-bottom: solid 1px #3b5a46;
+}
+.header_container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	max-width: 144rem;
-	margin: 0 auto;
 }
 footer {
 	padding: 6rem 0 4.1rem 0;

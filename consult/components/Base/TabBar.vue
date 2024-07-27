@@ -77,7 +77,7 @@ const props = withDefaults(defineProps<TabBarProps>(), {
 		font-weight: 400;
 		line-height: 2.4rem; /* 150% */
 	}
-	.link_visa .active {
+	.link_visa.active {
 		border: 1px solid #315b44;
 		font-weight: 700;
 		color: #315b44;
