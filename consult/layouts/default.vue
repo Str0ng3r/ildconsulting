@@ -33,7 +33,7 @@ const anotherUrls = [
 						<NuxtLink to="about" class="nav_link">Про нас</NuxtLink>
 						<NuxtLink to="faq" class="nav_link">FAQ</NuxtLink>
 					</ul>
-					<NuxtLink to="contact" class="call_button"
+					<NuxtLink to="/contacts" class="call_button"
 						>Зв’язатись з нами</NuxtLink
 					>
 				</div>

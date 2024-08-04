@@ -1,4 +1,28 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import axios from "axios";
+const phone = ref("");
+const email = ref("");
+const name = ref("");
+const message = ref("");
+const statusSend = ref(false);
+const sendMessage = async () => {
+	try {
+		const response = await axios.post(
+			"https://66ae1e49b18f3614e3b6cd3e.mockapi.io/ild/consult/applications",
+			{
+				name: name.value,
+				phone: phone.value,
+				email: email.value,
+				message: message.value,
+			}
+		);
+		statusSend.value = true;
+		console.log(response.data);
+	} catch (error) {
+		console.error("Error sending message:", error);
+	}
+};
+</script>
 
 <template>
 	<div class="container">
@@ -24,12 +48,23 @@
 						найкоротший термін.</span
 					>
 				</p>
-				<form class="form_contacts">
+				<div class="succes_message" v-show="statusSend">
+					<p>
+						<span>Дякуємо за вашу заявку!</span>Найближчим часом ми розглянемо
+						її та сконтактуємо з вами по вашому питанню. <br />Гарного дня!
+					</p>
+				</div>
+				<form
+					class="form_contacts"
+					@submit.prevent="sendMessage"
+					v-show="!statusSend"
+				>
 					<h2 class="form_title">Форма для зворотнього зв'язку</h2>
 					<input
 						type="text"
 						name="nameus"
 						id="nameus"
+						v-model="name"
 						placeholder="Ваше ім'я"
 						class="input_form"
 					/>
@@ -37,12 +72,14 @@
 						type="tel"
 						name="phone"
 						id="phone"
+						v-model="phone"
 						placeholder="Номер телефону"
 						class="input_form"
 					/>
 					<input
 						type="mail"
 						name="mail"
+						v-model="email"
 						id="mail"
 						placeholder="Електронна скринька"
 						class="input_form"
@@ -51,10 +88,12 @@
 						name="message"
 						id="message"
 						class="message_form"
+						v-model="message"
+						maxlength="300"
 						placeholder="Запитання"
 						rows="5"
 					></textarea>
-					<button class="send_button_form">Відправити</button>
+					<button type="submit" class="send_button_form">Відправити</button>
 				</form>
 			</div>
 		</div>
@@ -80,6 +119,40 @@
 	border-radius: 0.5rem;
 	background: #315b44;
 	line-height: 2.8rem; /* 175% */
+}
+.succes_message {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10rem;
+	width: 100%;
+	max-width: 56.4rem;
+	border-radius: 0.5rem;
+	border: 1px solid #ddd;
+	background: #fff;
+	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.12);
+}
+.succes_message p {
+	color: #1d1d1d;
+	font-family: "Roboto";
+	font-size: 3.2rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 4rem; /* 125% */
+	text-align: center;
+}
+.succes_message p > span {
+	color: #1d1d1d;
+	font-family: "Roboto";
+	font-size: 3.2rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 4rem; /* 125% */
+	text-align: center;
+	width: 100%;
+	display: block;
+	text-wrap: nowrap;
+	margin-bottom: 2rem;
 }
 .message_form {
 	padding: 1.3rem 1.6rem;

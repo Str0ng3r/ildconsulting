@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import axios from "axios";
 const points = [
 	{
 		name: "24/7",
@@ -41,6 +42,24 @@ const points = [
 		icon: "star",
 	},
 ];
+const statusReview = ref(false);
+const nameRew = ref("");
+const reviewText = ref("");
+const sendReview = async () => {
+	try {
+		const response = await axios.post(
+			"https://66ae1e49b18f3614e3b6cd3e.mockapi.io/ild/consult/reviews",
+			{
+				name: nameRew.value,
+				review: reviewText.value,
+			}
+		);
+		statusReview.value = true;
+		console.log(response.data);
+	} catch (error) {
+		console.error("Error sending message:", error);
+	}
+};
 </script>
 
 <template>
@@ -80,7 +99,7 @@ const points = [
 				</div>
 			</div>
 		</section>
-		<section class="reviews">
+		<!-- <section class="reviews">
 			<div class="container_wrap rules_wrap">
 				<p class="notify_rules">
 					Ми не гарантуємо Вам позитивного рішення. Ми гарантуємо Вам професійну
@@ -94,7 +113,7 @@ const points = [
 				</p>
 				<h2 class="opinions_title">Відгуки нашіх клієнтів</h2>
 			</div>
-		</section>
+		</section> -->
 		<section class="form_section">
 			<div class="container_wrap form_cont">
 				<img
@@ -102,21 +121,30 @@ const points = [
 					alt="man_with_document"
 					class="img_form"
 				/>
-				<form class="form_opinion">
+				<div class="message_success" v-show="statusReview">
+					<p>Дякуємо за ваш відгук!</p>
+				</div>
+				<form
+					class="form_opinion"
+					@submit.prevent="sendReview"
+					v-show="!statusReview"
+				>
 					<h2 class="form_title">Форма для відгуку</h2>
 					<input
 						type="text"
 						class="input_form name_input"
 						placeholder="Ваше ім'я та прізвище"
+						v-model="nameRew"
 					/>
 					<textarea
 						name="opinion"
 						id="opin"
 						class="input_form textarea_input"
 						placeholder="Ваш відгук"
+						v-model="reviewText"
 						rows="20"
 					></textarea>
-					<button class="button_send">Відправити</button>
+					<button class="button_send" type="submit">Відправити</button>
 					<p class="anonym_message">
 						*** Якщо ви хочете залишити відгук про нашу компанію, будь ласка,
 						скористайтеся цією формою. Ми гарантуємо повну конфіденційність та
@@ -134,7 +162,9 @@ const points = [
 					для успішного старту та впевненого розвитку у Вашому житті. <br />
 					<span>Обирайте ILD Consulting Ltd для досягнення Ваших цілей!</span>
 				</p>
-				<button class="call_to_action">Зв'язатись з нами</button>
+				<NuxtLink class="call_to_action" to="/contacts"
+					>Зв'язатись з нами</NuxtLink
+				>
 			</div>
 		</section>
 	</div>
@@ -273,6 +303,30 @@ const points = [
 	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.12);
 	padding: 6.2rem 4.2rem 4.2rem 4.2rem;
 }
+.message_success {
+	margin: auto 0;
+	width: 100%;
+	max-width: 40rem;
+	border-radius: 0.5rem;
+	border: 1px solid #ddd;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: #fff;
+	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.12);
+	padding: 6.2rem 4.2rem 4.2rem 4.2rem;
+}
+.message_success p {
+	color: #1d1d1d;
+	font-family: "Roboto";
+	font-size: 3.2rem;
+	font-style: normal;
+	font-weight: 700;
+	margin-bottom: 2.8rem;
+	line-height: 4rem; /* 125% */
+	text-align: center;
+}
 .form_section {
 	background: linear-gradient(180deg, #f2f7f4 0%, #f2f7f4 100%);
 	padding-top: 5.8rem;
@@ -285,7 +339,7 @@ const points = [
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
-	gap: 4rem;
+	gap: 8rem;
 }
 .opinions_title {
 	color: #1d1d1d;
